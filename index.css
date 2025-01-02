@@ -1,0 +1,60 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Darker, richer background colors */
+  --background-primary: #030303;
+  --background-secondary: #0A0A0A;
+  
+  /* More vibrant accent colors */
+  --accent-blue: #3B82F6;
+  --accent-purple: #8B5CF6;
+  --accent-pink: #EC4899;
+}
+
+/* Performance optimizations */
+.will-change-transform {
+  will-change: transform;
+}
+
+.will-change-opacity {
+  will-change: opacity;
+}
+
+/* Optimize animations */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Layer compositing optimization */
+.transform-gpu {
+  transform: translateZ(0);
+}
+
+/* Improved scrolling performance */
+body {
+  background-color: var(--background-primary);
+  color: white;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+}
+
+/* Reduce layout shifts */
+* {
+  backface-visibility: hidden;
+}
+
+/* Optimize glass effect performance */
+.glass-effect {
+  @apply backdrop-blur-xl bg-white/[0.02] border border-white/[0.05];
+  transform: translateZ(0);
+}
