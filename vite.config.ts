@@ -6,18 +6,17 @@ export default defineConfig({
   plugins: [react()],
   resolve: {
     alias: {
-      '@': resolve(__dirname, 'src')
+      '@': resolve(__dirname, './src')
     }
   },
   build: {
     outDir: 'dist',
+    sourcemap: false,
     rollupOptions: {
       input: {
-        app: resolve(__dirname, 'index.html')
+        main: resolve(__dirname, 'index.html')
       }
-    },
-    sourcemap: true,
-    chunkSizeWarningLimit: 1000
+    }
   },
   server: {
     port: 3000,
