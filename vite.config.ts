@@ -6,35 +6,21 @@ export default defineConfig({
   plugins: [react()],
   resolve: {
     alias: {
-      '@': resolve(__dirname, './src')
+      '@': resolve(__dirname, 'src')
     }
   },
   build: {
+    outDir: 'dist',
     rollupOptions: {
       input: {
-        main: resolve(__dirname, 'index.html')
-      },
-      output: {
-        manualChunks: {
-          vendor: ['react', 'react-dom'],
-          router: ['react-router-dom'],
-          animations: ['framer-motion'],
-          ui: ['lucide-react']
-        }
+        app: resolve(__dirname, 'index.html')
       }
     },
-    sourcemap: false,
-    chunkSizeWarningLimit: 1000,
-    minify: 'terser',
-    terserOptions: {
-      compress: {
-        drop_console: true,
-        drop_debugger: true
-      }
-    }
+    sourcemap: true,
+    chunkSizeWarningLimit: 1000
   },
   server: {
-    open: true,
-    host: true
+    port: 3000,
+    open: true
   }
 });
