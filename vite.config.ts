@@ -11,18 +11,30 @@ export default defineConfig({
   },
   build: {
     rollupOptions: {
+      input: {
+        main: resolve(__dirname, 'index.html')
+      },
       output: {
-        manualChunks: (id) => {
-          if (id.includes('node_modules')) {
-            if (id.includes('react')) return 'vendor';
-            if (id.includes('framer-motion')) return 'animations';
-            if (id.includes('lucide-react')) return 'icons';
-            return 'vendor';
-          }
+        manualChunks: {
+          vendor: ['react', 'react-dom'],
+          router: ['react-router-dom'],
+          animations: ['framer-motion'],
+          ui: ['lucide-react']
         }
       }
     },
+    sourcemap: false,
     chunkSizeWarningLimit: 1000,
-    sourcemap: true
+    minify: 'terser',
+    terserOptions: {
+      compress: {
+        drop_console: true,
+        drop_debugger: true
+      }
+    }
+  },
+  server: {
+    open: true,
+    host: true
   }
 });
