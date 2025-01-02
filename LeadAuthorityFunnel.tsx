@@ -1,94 +1,83 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Brain, Target, Users, LineChart, Megaphone, CheckCircle } from 'lucide-react';
+import { Target, Users, LineChart, CheckCircle } from 'lucide-react';
+import GradientText from '../../components/ui/GradientText';
+import GlowingButton from '../../components/ui/GlowingButton';
+import ServiceHeader from '../../components/services/ServiceHeader';
+import LeadAuthorityFunnel from '../../components/funnels/LeadAuthorityFunnel';
+import AnimatedGradientBlob from '../../components/effects/AnimatedGradientBlob';
 
-const funnelStages = [
-  {
-    icon: <Brain className="w-6 h-6 text-accent-blue" />,
-    title: "Market Analysis",
-    description: "AI analyzes your market and identifies ideal prospects",
-    width: "w-full",
-    color: "from-accent-blue/20 to-transparent"
-  },
-  {
-    icon: <Target className="w-6 h-6 text-accent-purple" />,
-    title: "Strategic Targeting",
-    description: "Precision targeting of high-value prospects",
-    width: "w-[85%]",
-    color: "from-accent-purple/20 to-transparent"
-  },
-  {
-    icon: <Users className="w-6 h-6 text-accent-pink" />,
-    title: "Authority Building",
-    description: "Establish expertise and build trust",
-    width: "w-[70%]",
-    color: "from-accent-pink/20 to-transparent"
-  },
-  {
-    icon: <Megaphone className="w-6 h-6 text-accent-blue" />,
-    title: "Lead Capture",
-    description: "Convert interest into qualified leads",
-    width: "w-[55%]",
-    color: "from-accent-blue/20 to-transparent"
-  },
-  {
-    icon: <LineChart className="w-6 h-6 text-accent-purple" />,
-    title: "Nurture Sequence",
-    description: "Automated follow-up and engagement",
-    width: "w-[40%]",
-    color: "from-accent-purple/20 to-transparent"
-  },
-  {
-    icon: <CheckCircle className="w-6 h-6 text-accent-pink" />,
-    title: "Conversion",
-    description: "Transform leads into loyal customers",
-    width: "w-[25%]",
-    color: "from-accent-pink/20 to-transparent"
-  }
-];
+const LeadAuthorityFunnelPage = () => {
+  const benefits = [
+    "Never let quality leads slip through the cracks",
+    "Build authority in your local market",
+    "Convert more leads into paying customers",
+    "Automate your entire sales process",
+    "Track and optimize conversion rates",
+    "Scale your business predictably"
+  ];
 
-const LeadAuthorityFunnel = () => {
   return (
-    <div className="py-12">
-      <div className="relative max-w-3xl mx-auto">
-        {funnelStages.map((stage, index) => (
-          <motion.div
-            key={index}
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ delay: index * 0.2 }}
-            className={`
-              relative mx-auto mb-4 p-6
-              ${stage.width}
-              bg-gradient-to-b ${stage.color}
-              rounded-lg border border-white/10
-              transform hover:scale-105 transition-transform duration-300
-            `}
-          >
-            <div className="flex items-center space-x-4">
-              <div className="p-2 rounded-full bg-background-secondary">
-                {stage.icon}
-              </div>
-              <div>
-                <h3 className="font-bold text-lg">{stage.title}</h3>
-                <p className="text-sm text-gray-400">{stage.description}</p>
-              </div>
-            </div>
-            {index < funnelStages.length - 1 && (
-              <div className="absolute -bottom-4 left-1/2 transform -translate-x-1/2">
-                <motion.div
-                  animate={{ y: [0, 5, 0] }}
-                  transition={{ duration: 2, repeat: Infinity }}
-                >
-                  <div className="w-0 h-0 border-l-8 border-l-transparent border-r-8 border-r-transparent border-t-8 border-accent-purple/30" />
-                </motion.div>
-              </div>
-            )}
-          </motion.div>
-        ))}
+    <div className="relative min-h-screen pt-20">
+      <AnimatedGradientBlob />
+      
+      <div className="max-w-7xl mx-auto px-4">
+        <ServiceHeader
+          title={<>The <GradientText>Lead Authority</GradientText> Funnel</>}
+          description="Transform your lead generation with our proven system that attracts, nurtures, and converts high-quality leads into loyal customers."
+        />
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          className="mb-16"
+        >
+          <h2 className="text-2xl font-bold mb-8 text-center">
+            How the <GradientText>Lead Authority Funnel</GradientText> Works
+          </h2>
+          <LeadAuthorityFunnel />
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          className="bg-background-secondary p-8 rounded-lg border border-accent-purple/10 mb-16"
+        >
+          <h2 className="text-2xl font-bold mb-6">Why It Matters</h2>
+          <p className="text-gray-300 mb-8">
+            You've probably spent money on marketing before, only to see leads slip through the cracks. 
+            That's frustrating—and expensive. Our funnel ensures every lead gets the attention they 
+            need to convert into a client.
+          </p>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {benefits.map((benefit, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ delay: index * 0.1 }}
+                className="flex items-center space-x-3"
+              >
+                <CheckCircle className="w-5 h-5 text-accent-purple" />
+                <span>{benefit}</span>
+              </motion.div>
+            ))}
+          </div>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          className="text-center"
+        >
+          <GlowingButton onClick={() => window.location.href = '/contact'}>
+            Start Your Lead Authority Funnel
+          </GlowingButton>
+        </motion.div>
       </div>
     </div>
   );
 };
 
-export default LeadAuthorityFunnel;
+export default LeadAuthorityFunnelPage;
